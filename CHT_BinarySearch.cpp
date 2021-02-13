@@ -9,7 +9,7 @@ typedef long long ll;
 const ll NMAX = 3e5 + 5;
 ll N, arr[NMAX], Sum[NMAX], a[NMAX], b[NMAX], sz, ans, ret;
 
-// BOJ 5254
+// BOJ 5254 Balls
 // CHT_이분탐색 (최댓값 기준)
 
 double cross(ll x, ll y) { return ((double)b[x] - b[y]) / (a[y] - a[x]); }
