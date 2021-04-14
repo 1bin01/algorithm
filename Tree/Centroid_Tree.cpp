@@ -8,14 +8,14 @@ using namespace std;
 #define all(v) v.begin(), v.end()
 typedef long long ll;
 
+// BOJ 13514 트리와 쿼리 5
+// Centroid Tree
+
 const int NMAX = 1e5 + 5;
 int n, m, a, b, op, x, chk[NMAX];
 int W[NMAX], vis[NMAX], par[NMAX], dpt[NMAX], sparse[NMAX][18];
 vector<int> adj[NMAX];
 priority_queue<pair<int, int>> pq[NMAX];
-
-// BOJ 13514 트리와 쿼리 5
-// Centroid Tree
 
 int dfs(int now, int bef) {
 	W[now] = 1;
