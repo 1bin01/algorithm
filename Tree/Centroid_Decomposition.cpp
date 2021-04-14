@@ -5,13 +5,14 @@
 
 using namespace std;
 
-const int NMAX = 2e5 + 5, INF = 1e9;
-int N, K, a, b, l, sz[NMAX], vis[NMAX], d[1000005];
-vector<pair<int, int>> adj[NMAX];
-queue<int> Q;
-
 // BOJ 5820 경주
 // centroid decomposition
+
+const int NMAX = 2e5 + 5, INF = 1e9;
+int N, K, a, b, l;
+int sz[NMAX], vis[NMAX], d[1000005];
+vector<pair<int, int>> adj[NMAX];
+queue<int> Q;
 
 int dfs(int now, int bef) {
 	sz[now] = 1;
