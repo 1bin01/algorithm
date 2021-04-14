@@ -6,6 +6,9 @@
 
 using namespace std;
 
+typedef long long ll;
+#define all(v) v.begin(), v.end()
+
 // BOJ 2927 남극 탐험
 // Heavy-Light 분할 (가중치가 정점에 있는 경우)
 
