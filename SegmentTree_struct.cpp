@@ -4,10 +4,11 @@
 
 using namespace std;
 
+typedef long long ll;
+
 // BOJ 15561 구간 합 최대? 2
 // 구조체 세그트리 응용
 
-typedef long long ll;
 const ll INF = 1e18;
 struct node {
 	ll l, r, m, s;
