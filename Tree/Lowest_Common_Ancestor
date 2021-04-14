@@ -10,7 +10,7 @@ ll N, K, ans, a, b, p[NMAX][19], lv[NMAX], cnt[NMAX], m[NMAX];
 vector<ll>  adj[NMAX];
 
 // BOJ 11960 Max Flow
-// LCA
+// sparse table을 이용한 O(log(n)) LCA
 
 void dfs(int now, int l) {
 	lv[now] = l;
