@@ -5,11 +5,12 @@
 using namespace std;
 
 typedef long long ll;
-ll N, Q, base = 1, a, b, c;
-vector<ll> Tree;
 
 // BOJ 12837 가계부
 // 세그먼트 트리 기본 구현
+
+ll N, Q, base = 1, a, b, c;
+vector<ll> Tree;
 
 void update(ll idx, ll v) {         // 추가 or (변경)
 	idx += base - 1;
