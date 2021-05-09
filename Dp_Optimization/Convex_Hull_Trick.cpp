@@ -1,63 +1,49 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 
 using namespace std;
 
+#define all(v) v.begin(), v.end()
 typedef long long ll;
-ll N, a, b, Max, n, sz, p;
-vector<pair<ll, ll>> tmp, arr;
-vector<ll> dp, A;
+const ll NMAX = 1e5 + 5;
+ll n;
+ll A[NMAX], B[NMAX], m[NMAX], p[NMAX], sz, ii;
 
-// BOJ 6171 땅따먹기
-// CHT (단조 증가할 때)  - 최솟값 기준
+// BOJ 13263 나무 자르기
+// CHT (기울기 단조 감소, x 단조 증가) - 최솟값 구하기 O(n)
 
-double cross(ll a, ll b) { return ((double)(dp[b] - dp[a])) / (A[a] - A[b]); }
 
-void insert(ll a, ll b) {
-	A[sz] = a; dp[sz] = b;
+double cross(ll a, ll b) { return 1.0 * (p[b] - p[a]) / (m[a] - m[b]);  }
 
-	while (sz > 1 && cross(sz - 2, sz - 1) >= cross(sz - 1, sz)) {
-		A[sz - 1] = A[sz];
-		dp[sz - 1] = dp[sz];
+void insert(ll mm, ll pp) {
+	m[sz] = mm;
+	p[sz] = pp;
+
+	while (sz > 1 && cross(sz - 1, sz - 2) >= cross(sz - 1, sz)) {
+		m[sz - 1] = m[sz];
+		p[sz - 1] = p[sz];
 		sz--;
 	}
 	sz++;
 	return;
 }
 
-ll sol(ll x) {
-	while (p + 1 < sz && cross(p, p + 1) <= x) p++;
-	return A[p] * x + dp[p];
+ll go(ll x) {
+	while (ii + 1 < sz && cross(ii, ii + 1) <= x) ii++;
+	return x * m[ii] + p[ii];
 }
 
-/*
 int main(void) {
 	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
-	cin >> N;
-	for (int i = 0; i < N; i++) {
-		cin >> a >> b;
-		tmp.emplace_back(-a, -b);
+	cin >> n;
+	for (int i = 1; i <= n; i++) cin >> A[i];
+	for (int i = 1; i <= n; i++) cin >> B[i];
+	insert(B[1], 0);
+	for (int i = 2; i <= n; i++) {
+		p[i] = go(A[i]);
+		insert(B[i], p[i]);
 	}
-	sort(tmp.begin(), tmp.end());
-	Max = -1;
-	for (int i = 0; i < N; i++) {
-		a = -tmp[i].first; b = -tmp[i].second;
-		if (b <= Max) continue;
-		Max = max(Max, b);
-		arr.emplace_back(a, b);
-	}
-
-	n = arr.size();
-	dp.resize(n + 1); A.resize(n + 1);
-
-	for (int i = 1; i <= n; i++) {
-		a = arr[i - 1].first; b = arr[i - 1].second;
-		insert(a, dp[i - 1]);
-		dp[i] = sol(b);
-	}
-	cout << dp[n] << '\n';
-	return	 0;
+	cout << p[n] << '\n';
+	return 0;
 }
-*/
