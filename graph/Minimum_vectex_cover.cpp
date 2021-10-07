@@ -16,7 +16,7 @@ int dfs(int now) {
 // minium vertex cover 원소 구하기
 // X : L의 매칭되지 않은 정점으로부터 도달할 수 있는 L, R의 모든 정점
 // C = (L - X) U (R ∩ X)
-int X[NMAX], C[NMAX * 2];	
+int X[NMAX * 2], C[NMAX * 2];	
 void go(int now) {
 	if (X[now]) return;
 	X[now] = 1;	
