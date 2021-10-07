@@ -38,5 +38,5 @@ int main(void){
 
 	// mvc 구하기
 	for (int i = 1; i <= n; i++) C[i] = ~X[i];
-	for (int i = n + 1; i <= 2 * n; i++) C[i] = X[i]; 
+	for (int i = n + 1; i <= n + m; i++) C[i] = X[i]; 
 }
