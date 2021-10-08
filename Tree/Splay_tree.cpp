@@ -95,12 +95,12 @@ void init_tree() {
 	node* x;
 	x = tree = new node();
 
-	// n : 오른쪽 더미 노드
+	// n + 1 : 오른쪽 더미 노드
 	for (int i = 1; i <= n + 1; i++) {
 		x->r = new node(a[i]);
 		x->r->p = x;
 		x = x->r;
-		idx[i] = x;
+		// idx[i] = x;	i번째 노드를 가르키는 포인터
 	}
 	while (x) {
 		pull(x); x = x->p;
@@ -140,7 +140,7 @@ void gather(int l, int r) {
 	t->r = tree;
 	tree->p = t;
 	// 다시 tree(루트)를 복원
-	tree = t;
+	tree = t; pull(tree);
 	return;
 }
 
@@ -158,19 +158,18 @@ void insert(int i, ll val) {
 void erase(int i) {
 	gather(i, i);
 	node* x = tree->r->l;
-	tree->r->l = NULL;
+	tree->r->l = NULL; 
 	delete x;
+	splay(tree->r);
 	return;
 }
 
-ll Min(int l, int r) {
-	gather(l, r);
-	return tree->r->l->mn;
-}
-
-ll Max(int l, int r) {
-	gather(l, r);
-	return tree->r->l->mx;
+// 트리의 원소들을 inoder로 출력
+void print(node* x) {
+	if (x->l) print(x->l);
+	cout << x->val << ' ';
+	if (x->r) print(x->r);
+	return;
 }
 
 ll Sum(int l, int r) {
