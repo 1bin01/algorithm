@@ -11,26 +11,6 @@ ll n, q, a[NMAX], op, l, r, x;
 node* tree;
 node* idx[NMAX];
 
-// rotate 후에 값들을 갱신
-void pull(node* x) {
-	x->sz = 1;
-	x->sum = x->mn = x->mx = x->val;
-
-	if (x->l) {
-		x->sz += x->l->sz;
-		x->sum += x->l->sum;
-		x->mn = min(x->mn, x->l->mn);
-		x->mx = max(x->mx, x->l->mx);
-	}
-	if (x->r) {
-		x->sz += x->r->sz;
-		x->sum += x->r->sum;
-		x->mn = min(x->mn, x->r->mn);
-		x->mx = max(x->mx, x->r->mx);
-	}
-	return;
-}
-
 // lazy값을 업데이트(inv 업데이트)
 void push(node* x) {
 	if (!x->inv) return;
@@ -38,6 +18,28 @@ void push(node* x) {
 	if (x->l) x->l->inv ^= 1;
 	if (x->r) x->r->inv ^= 1;
 	x->inv = 0;
+	return;
+}
+
+// rotate 후에 값들을 갱신
+void pull(node* x) {
+	x->sz = 1;
+	x->sum = x->mn = x->mx = x->val;
+
+	if (x->l) {
+		push(x->l);
+		x->sz += x->l->sz;
+		x->sum += x->l->sum;
+		x->mn = min(x->mn, x->l->mn);
+		x->mx = max(x->mx, x->l->mx);
+	}
+	if (x->r) {
+		push(x->r);
+		x->sz += x->r->sz;
+		x->sum += x->r->sum;
+		x->mn = min(x->mn, x->r->mn);
+		x->mx = max(x->mx, x->r->mx);
+	}
 	return;
 }
 
