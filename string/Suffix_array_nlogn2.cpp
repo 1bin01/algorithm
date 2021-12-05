@@ -1,3 +1,4 @@
+// 배열 크기는 2배로 잡기
 int n, sa[NMAX], g[NMAX], tmp[NMAX];
 string s;
 
