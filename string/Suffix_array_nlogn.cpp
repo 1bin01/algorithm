@@ -1,3 +1,5 @@
+// 배열 크기는 2배로
+// m = max(n, 26) + 1
 int n, m, sa[NMAX], g[NMAX], cnt[NMAX], idx[NMAX], tmp[NMAX];
 string s;
 
