@@ -18,4 +18,5 @@ for (int i = 0; i < n; i++) {
 		for (int i = 1; i < n; i++)
 			tmp[sa[i]] = tmp[sa[i - 1]] + cmp(sa[i - 1], sa[i]);
 		for (int i = 0; i < n; i++) g[i] = tmp[i];
+		if (g[sa[n - 1]] == n) break;
 	}
