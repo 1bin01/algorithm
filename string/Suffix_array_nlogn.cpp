@@ -1,11 +1,11 @@
 // 배열 크기는 2배로
-// m = max(n, 26) + 1
+// m = max(n, 128)
 int n, m, sa[NMAX], g[NMAX], cnt[NMAX], idx[NMAX], tmp[NMAX];
 string s;
 
-  n = s.size(); m = max(n, 26) + 1;
+  n = s.size(); m = max(n, 128);
 	for (int i = 0; i < n; i++) {
-		g[i] = s[i] - 'a' + 1;
+		g[i] = s[i];
 		sa[i] = i;
 	}
 
