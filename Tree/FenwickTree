@@ -1,0 +1,18 @@
+ll n, m, k, fwk[NMAX], arr[NMAX];
+
+void update(int idx, ll x) {
+	while (idx <= n) {
+		fwk[idx] += x;
+		idx += idx & -idx;
+	}
+	return;
+}
+
+ll sum(int idx) {
+	ll ret = 0;
+	while (idx) {
+		ret += fwk[idx];
+		idx -= idx & -idx;
+	}
+	return ret;
+}
