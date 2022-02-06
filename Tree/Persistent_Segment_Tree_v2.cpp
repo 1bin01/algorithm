@@ -34,7 +34,7 @@ namespace pst {
 	}
 	int query(node* now, int nl, int nr, int l, int r) {
 		if (nl > r || nr < l) return 0;
-		if (l <= nl && nr <= r) return now->v;
+		if (nl >= l && nr <= r) return now->v;
 		int m = nl + nr >> 1;
 		return query(now->l, nl, m, l, r) + query(now->r, m + 1, nr, l, r);
 	}
