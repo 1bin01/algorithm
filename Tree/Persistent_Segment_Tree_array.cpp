@@ -38,9 +38,16 @@ namespace pst {
 		int m = nl + nr >> 1;
 		return query(nd[ix].l, nl, m, l, r) + query(nd[ix].r, m + 1, nr, l, r);
 	}
+	int kth(int i1, int i2, int l, int r, int k) {
+		while (l ^ r) {
+			int cnt = nd[nd[i2].l].v - nd[nd[i1].l].v;
+			int m = l + r >> 1;
+			if (k <= cnt) r = m, i1 = nd[i1].l, i2 = nd[i2].l;
+			else l = m + 1, k -= cnt, i1 = nd[i1].r, i2 = nd[i2].r;
+		}
+		return l;
+	}
 }
 
 pst::root[0] = pst::init(0, n);
-	for(int i = 1; i <= n; i++) {
-		pst::root[i] = pst::root[i - 1];
-  }
+
