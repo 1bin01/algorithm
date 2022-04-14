@@ -21,3 +21,10 @@ void upd(int ix, ll x) {
 	}
 	return;
 }
+
+node query(int ix, int nl, int nr, int l, int r) {
+	if(nl > r || nr < l) return { -inf, -inf, -inf, 0 };
+	if(nl >= l && nr <= r) return seg[ix];
+	int m = (nl + nr) / 2;
+	return merge(query(ix * 2, nl, m, l, r), query(ix * 2 + 1, m + 1, nr, l, r));
+}
