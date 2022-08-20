@@ -22,9 +22,11 @@ void getpi(){
             if(x){
                 int j = fail[x];
                 while(j && tri[j][i] == -1) j = fail[j];
-                if(tri[j][i] != -1) fail[nx] = tri[j][i];
+                if(tri[j][i] != -1) {
+                    fail[nx] = tri[j][i];
+                    if(term[tri[j][i]]) term[nx] = 1;
+                }
             }
-            if(term[fail[nx]]) term[nx] = 1;
             q.emplace(nx);
         }
     }
