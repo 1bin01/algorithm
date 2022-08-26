@@ -1,7 +1,8 @@
 ll n, dist[NMAX], cy;
 vector<pair<int, ll>> adj[NMAX];
 
-void bmf(){
+void bmf(int s){
+    dist[s] = 0;
     for(int t = 0; t < n; t++)
         for(int i = 1; i <= n; i++)
             for(auto&[j, c] : adj[i])
