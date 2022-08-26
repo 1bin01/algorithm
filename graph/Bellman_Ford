@@ -1,14 +1,13 @@
 ll n, dist[NMAX], cy;
 vector<pair<int, ll>> adj[NMAX];
 
-void bmf(int s){
-    dist[s] = 0;
-    for(int t = 0; t < n; t++)
-        for(int i = 1; i <= n; i++)
-            for(auto&[j, c] : adj[i])
-                if(dist[i] != inf && dist[i] + c < dist[j]){
-                    dist[j] = dist[i] + c;
-                    if(t == n - 1) cy = 1;
+void bmf(){
+    for(int i = 0; i < n; i++)
+        for(int x = 1; x <= n; x++)
+            for(auto&[nx, t] : adj[x])
+                if(dist[x] + t < dist[nx]){
+                    dist[nx] = dist[x] + t;
+                    if(i == n - 1) cy = 1;   
                 }
     return;
 }
