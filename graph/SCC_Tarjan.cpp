@@ -27,3 +27,6 @@ int dfs(int x){
     }
     return ret;
 }
+
+    for(int i =1; i <= n; i++)
+        if(!dfsn[i]) dfs(i);
