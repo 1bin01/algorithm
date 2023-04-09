@@ -25,6 +25,7 @@ int inTriangle(vector<pt> t, pt p){
     for(int i = 0; i < 3; i++)
         sign[i] = ccw(t[i], t[(i + 1) % 3], p);
     if(sign[0] == sign[1] && sign[1] == sign[2]) return -1;
-    for(int i = 0; i < 3; i++) if(sign[i] * sign[i + 1] == -1) return 1;
+    for(int i = 0; i < 3; i++) if(sign[i] * sign[(i + 1) % 3] == -1) return 1;
     return 0;
 }
+
