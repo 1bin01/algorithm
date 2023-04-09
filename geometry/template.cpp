@@ -16,7 +16,7 @@ int ccw(pt a, pt b, pt c){
 // 두 점 사이의 거리 (제곱)
 ll dist(pt& a, pt& b){
     pt d = b - a;
-    return d.x * d.x + d.y * d.y;
+    return d.sz();
 }
 
 // 다각형의 넓이 O(n)
