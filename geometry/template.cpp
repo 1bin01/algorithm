@@ -13,6 +13,12 @@ int ccw(pt a, pt b, pt c){
     return (b / c > 0) - (b / c < 0);
 }
 
+// 두 점 사이의 거리 (제곱)
+ll dist(pt& a, pt& b){
+    pt d = b - a;
+    return d.x * d.x + d.y * d.y;
+}
+
 // 다각형의 넓이 O(n)
 double area(vector<pt> v){
     double ret = 0;
@@ -21,7 +27,7 @@ double area(vector<pt> v){
     return abs(ret) / 2.0;
 }
 
-// ConvexHull
+// ConvexHull O(nlogn)
 vector<pt> hull(vector<pt> v){
     int ix = min_element(all(v)) - v.begin();
     swap(v[0], v[ix]);
@@ -37,7 +43,7 @@ vector<pt> hull(vector<pt> v){
     }
     
     /*
-    # 마지막 점들이 일직선 상에 있는 경우 고려
+    # 마지막 점들이 일직선 상에 있는 경우에 예외처리를 해야 하는 경우
     int i = v.size() - 1;
     while(i >= 1 && !ccw(v[0], v[i], v[i - 1])) i--;
     reverse(v.begin() + i, v.end());
