@@ -23,7 +23,7 @@ double area(vector<pt> v){
 
 // ConvexHull
 vector<int> hull(vector<pt> arr){
-    int a, b, ix = min_element(all(arr)) - arr.begin();
+    int ix = min_element(all(arr)) - arr.begin();
     vector<int> v, st{ix};
     for(int i = 0; i < arr.size(); i++) if(i != ix) v.emplace_back(i);
     
