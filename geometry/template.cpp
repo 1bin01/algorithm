@@ -22,18 +22,18 @@ double area(vector<pt> v){
 }
 
 // ConvexHull
-vector<int> hull(vector<pt> arr){
-    int ix = min_element(all(arr)) - arr.begin();
-    vector<int> v, st{ix};
-    for(int i = 0; i < arr.size(); i++) if(i != ix) v.emplace_back(i);
+vector<pt> hull(vector<pt> v){
+    int ix = min_element(all(v)) - v.begin();
+    swap(v[0], v[ix]);
+    vector<pt> st;
     
-    sort(all(v), [&](int a, int b){
-        pt x = arr[a] - arr[ix], y = arr[b] - arr[ix];
-        return x / y ? x / y > 0 : x.sz() < y.sz();
+    sort(v.begin() + 1, v.end(), [&] (pt& a, pt b){
+       pt x = a - v[0], y = b - v[0];
+       return x / y ? x / y > 0 : x.sz() < y.sz();
     });
-    for(int& i : v){
-        while(st.size() > 1 && ccw(arr[st[st.size() - 2]], arr[st.back()], arr[i]) <= 0) st.pop_back();
-        st.emplace_back(i);
+    for(auto& p : v){
+        while(st.size() > 1 && ccw(st[st.size() - 2], st.back(), p) <= 0) st.pop_back();
+        st.emplace_back(p);
     }
     return st;
 }
