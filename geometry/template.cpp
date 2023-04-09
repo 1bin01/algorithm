@@ -35,6 +35,13 @@ vector<pt> hull(vector<pt> v){
         while(st.size() > 1 && ccw(st[st.size() - 2], st.back(), p) <= 0) st.pop_back();
         st.emplace_back(p);
     }
+    
+    /*
+    # 마지막 점들이 일직선 상에 있는 경우 고려
+    int i = v.size() - 1;
+    while(i >= 1 && !ccw(v[0], v[i], v[i - 1])) i--;
+    reverse(v.begin() + i, v.end());
+    */
     return st;
 }
 
