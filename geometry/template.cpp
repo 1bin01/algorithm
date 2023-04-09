@@ -7,7 +7,8 @@ struct pt{
 };
 
 int ccw(pt a, pt b, pt c){
-    ll t = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    b = b - a; c = c - a;
+    ll t = b / c;
     return (t < 0) - (t > 0);
 }
 
@@ -29,3 +30,41 @@ int inTriangle(vector<pt> t, pt p){
     return 0;
 }
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define all(v) v.begin(), v.end()
+typedef long long ll;
+
+struct pt{
+    ll x, y;
+    pt operator + (pt t){return {x + t.x, y + t.y};}
+    pt operator - (pt t){return {x - t.x, y - t.y};}
+    ll operator * (pt t){return x * t.x, y * t.y;}
+    ll operator / (pt t){return x * t.y - y * t.x;}
+};
+
+int ccw(pt a, pt b, pt c){
+    b = b - a; c = c - a;
+    ll t = b / c;
+    return (t < 0) - (t > 0);
+}
+
+double area(vector<pt> v){
+    double ret = 0;
+    for(int i = 0, n = v.size(); i < n; i++)
+        ret += v[i] / v[(i + 1) % n];
+    return abs(ret) / 2.0; 
+}
+
+ll n;
+int main(void){
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    
+    cin >> n;
+    vector<pt> v(n);
+    for(int i = 0; i < n; i++) cin >> v[i].x >> v[i].y;
+    
+    return 0;
+}
