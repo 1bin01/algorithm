@@ -63,7 +63,22 @@ int inTriangle(vector<pt> t, pt p){
 
 // 볼록 다각형 내부의 점 판별 O(n)
 int inside(pt p, vector<pt> v){
+    if(v.size() < 3) return 0;
     for(int i = 0, n = v.size(); i < n; i++)
         if(ccw(v[i], v[(i + 1) % n], p) <= 0) return 0;
     return 1;
+}
+
+// 볼록 다각형 내부의 점 판별 O(logn)
+int inside(pt p, vector<pt> v){
+    int n = v.size();
+    if(n < 3 || ccw(v[0], v[1], p) < 0 || ccw(v[0], v[n - 1], p) > 0) return 0;
+    
+    int l = 1, r = n - 1, m;
+    while(l + 1 < r){
+        m = (l + r) / 2;
+        if(ccw(v[0], v[m], p) < 0) r = m;
+        else l = m;
+    }
+    return ccw(v[l], p, v[r]) < 0;
 }
