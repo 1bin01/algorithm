@@ -20,7 +20,7 @@ ll dist(pt& a, pt& b){
 }
 
 // 다각형의 넓이 O(n)
-double area(vector<pt> v){
+double area(vector<pt>& v){
     double ret = 0;
     for(int i = 0, n = v.size(); i < n; i++)
         ret += v[i] / v[(i + 1) % n];
@@ -52,7 +52,7 @@ vector<pt> hull(vector<pt> v){
 }
 
 // 삼각형 내부의 점 판별 O(1)
-int inTriangle(vector<pt> t, pt p){
+int inTriangle(vector<pt>& t, pt p){
     int sign[3];
     for(int i = 0; i < 3; i++)
         sign[i] = ccw(t[i], t[(i + 1) % 3], p);
@@ -62,7 +62,7 @@ int inTriangle(vector<pt> t, pt p){
 }
 
 // 볼록 다각형 내부의 점 판별 O(n)
-int inside(pt p, vector<pt> v){
+int inside(pt p, vector<pt>& v){
     if(v.size() < 3) return 0;
     for(int i = 0, n = v.size(); i < n; i++)
         if(ccw(v[i], v[(i + 1) % n], p) <= 0) return 0;
@@ -70,7 +70,7 @@ int inside(pt p, vector<pt> v){
 }
 
 // 볼록 다각형 내부의 점 판별 O(logn)
-int inside(pt p, vector<pt> v){
+int inside(pt p, vector<pt>& v){
     int n = v.size();
     if(n < 3 || ccw(v[0], v[1], p) < 0 || ccw(v[0], v[n - 1], p) > 0) return 0;
     
