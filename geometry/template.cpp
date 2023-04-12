@@ -60,3 +60,10 @@ int inTriangle(vector<pt> t, pt p){
     for(int i = 0; i < 3; i++) if(sign[i] * sign[(i + 1) % 3] == -1) return 1;
     return 0;
 }
+
+// 볼록 다각형 내부의 점 판별 O(n)
+int inside(pt p, vector<pt> v){
+    for(int i = 0, n = v.size(); i < n; i++)
+        if(ccw(v[i], v[(i + 1) % n], p) <= 0) return 0;
+    return 1;
+}
