@@ -75,10 +75,10 @@ int inside(pt p, vector<pt> v){
     if(n < 3 || ccw(v[0], v[1], p) < 0 || ccw(v[0], v[n - 1], p) > 0) return 0;
     
     int l = 1, r = n - 1, m;
-    while(l + 1 < r){
+    while(l < r){
         m = (l + r) / 2;
         if(ccw(v[0], v[m], p) < 0) r = m;
-        else l = m;
+        else l = m + 1;
     }
-    return ccw(v[l], p, v[r]) < 0;
+    return ccw(v[l - 1], p, v[l]) < 0;
 }
