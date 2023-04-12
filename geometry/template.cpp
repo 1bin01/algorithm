@@ -74,7 +74,7 @@ int inside(pt p, vector<pt> v){
     int n = v.size();
     if(n < 3 || ccw(v[0], v[1], p) < 0 || ccw(v[0], v[n - 1], p) > 0) return 0;
     
-    int l = 1, r = n - 1, m;
+    int l = 2, r = n - 1, m;
     while(l < r){
         m = (l + r) / 2;
         if(ccw(v[0], v[m], p) < 0) r = m;
