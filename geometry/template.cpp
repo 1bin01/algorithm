@@ -13,6 +13,18 @@ int ccw(pt a, pt b, pt c){
     return (b / c > 0) - (b / c < 0);
 }
 
+// 선분 교차 판정
+bool intersect(pt p1, pt p2, pt p3, pt p4){
+    int a = ccw(p1, p2, p3) * ccw(p1, p2, p4);
+    int b = ccw(p3, p4, p1) * ccw(p3, p4, p2);
+    if(!a && !b){
+        if(p2 < p1) swap(p1, p2);
+        if(p4 < p3) swap(p3, p4);
+        return !(p2 < p3 || p4 < p1);
+    }
+    return a <= 0 && b <= 0;
+}
+
 // 두 점 사이의 거리 (제곱)
 ll dist(pt& a, pt& b){
     pt d = b - a;
