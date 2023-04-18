@@ -4,6 +4,7 @@ struct pt{
     pt operator - (pt t){return {x - t.x, y - t.y};}
     ll operator * (pt t){return x * t.x, y * t.y;}
     ll operator / (pt t){return x * t.y - y * t.x;}
+    bool operator == (pt t){return x == t.x && y == t.y;}
     bool operator <(pt t){return x == t.x ? y < t.y : x < t.x;}
     ll sz(){return x * x + y * y;}
 };
@@ -23,6 +24,34 @@ bool intersect(pt p1, pt p2, pt p3, pt p4){
         return !(p2 < p3 || p4 < p1);
     }
     return a <= 0 && b <= 0;
+}
+
+// 두 선분의 교점 구하기
+bool getpoint(pt p1, pt p2, pt p3, pt p4, pt& p){
+    double d = (p4.y - p3.y) * (p2.x - p1.x) - (p4.x - p3.x) * (p2.y - p1.y);
+    double t = (p4.x - p3.x) * (p1.y - p3.y) - (p4.y - p3.y) * (p1.x - p3.x);
+    double s = (p2.x - p1.x) * (p1.y - p3.y) - (p2.y - p1.y) * (p1.x - p3.x);
+    if(!d){
+        // t == 0 : 동일한 선
+        
+        // t != 0 : 평행
+        if(p2 < p1) swap(p1, p2);
+        if(p4 < p3) swap(p3, p4);
+        
+        // 한 점에서 만나는 경우
+        if(p2 == p3) {
+            p = p2; return 1;
+        }    
+        if(p4 == p1){
+            p = p4; return 1;
+        }
+        return 0;
+    }
+    t /= d; s /= d;
+    // t >= 0 && t <= 0 : 교점 존재
+    p.x = p1.x + (p2.x - p1.x) * t;
+    p.y = p1.y + (p2.y - p1.y) * t;
+    return 1;
 }
 
 // 두 점 사이의 거리 (제곱)
