@@ -2,7 +2,7 @@ struct pt{
     ll x, y;
     pt operator + (pt t){return {x + t.x, y + t.y};}
     pt operator - (pt t){return {x - t.x, y - t.y};}
-    ll operator * (pt t){return x * t.x, y * t.y;}
+    ll operator * (pt t){return x * t.x + y * t.y;}
     ll operator / (pt t){return x * t.y - y * t.x;}
     bool operator == (pt t){return x == t.x && y == t.y;}
     bool operator <(pt t){return x == t.x ? y < t.y : x < t.x;}
@@ -74,7 +74,7 @@ vector<pt> hull(vector<pt> v){
     swap(v[0], v[ix]);
     vector<pt> st;
     
-    sort(v.begin() + 1, v.end(), [&] (pt& a, pt b){
+    sort(v.begin() + 1, v.end(), [&] (pt& a, pt& b){
        pt x = a - v[0], y = b - v[0];
        return x / y ? x / y > 0 : x.sz() < y.sz();
     });
