@@ -136,9 +136,10 @@ int inside(pt p, vector<pt>& v){
 }
 
 // 회전하는 캘리퍼스 O(n)
-double RotC(vector<pt> v){
-    double mx = 0;
+ll RotC(vector<pt> v){
     int n = v.size();
+    if(n == 2) return dist(v[0], v[1]);
+    ll mx = 0;
     for(int i = 0, j = 0; i < n; i++){
         while(ccw2(v[(i + 1) % n] - v[i], v[(j + 1) % n] - v[j]) >= 0) mx = max(mx, dist(v[i], v[j])), j = (j + 1) % n;
         mx = max(mx, dist(v[i], v[j]));
