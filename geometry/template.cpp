@@ -60,6 +60,16 @@ ll dist(pt& a, pt& b){
     return d.sz();
 }
 
+double linedist(pt a, pt b, pt c){
+    double d = 0;
+    pt t = b - a;
+    // 선분일 경우
+    if(t * (c - a) <= 0) return sqrt(dist(a, c));
+    if(t * (c - b) >= 0) return sqrt(dist(b, c));
+    //   
+    return abs(t / (c - a)) / sqrt(t.sz());
+}
+
 // 다각형의 넓이 O(n)
 double area(vector<pt>& v){
     double ret = 0;
