@@ -13,6 +13,7 @@ int ccw(pt a, pt b, pt c){
     b = b - a; c = c - a;
     return (b / c > 0) - (b / c < 0);
 }
+int ccw2(pt a, pt b){ return (a / b > 0) - (a / b < 0);}
 
 // 선분 교차 판정
 bool intersect(pt p1, pt p2, pt p3, pt p4){
@@ -132,4 +133,15 @@ int inside(pt p, vector<pt>& v){
         else l = m + 1;
     }
     return ccw(v[l - 1], p, v[l]) < 0;
+}
+
+// 회전하는 캘리퍼스 O(n)
+double RotC(vector<pt> v){
+    double mx = 0;
+    int n = v.size();
+    for(int i = 0, j = 0; i < n; i++){
+        while(ccw2(v[(i + 1) % n] - v[i], v[(j + 1) % n] - v[j]) >= 0) mx = max(mx, dist(v[i], v[j])), j = (j + 1) % n;
+        mx = max(mx, dist(v[i], v[j]));
+    }
+    return mx;
 }
