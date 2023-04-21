@@ -63,7 +63,6 @@ ll dist(pt& a, pt& b){
 
 // 직선(선분)과 점의 거리
 double linedist(pt a, pt b, pt c){
-    double d = 0;
     pt t = b - a;
     // 선분일 경우
     if(t * (c - a) <= 0) return sqrt(dist(a, c));
