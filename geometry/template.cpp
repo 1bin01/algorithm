@@ -61,6 +61,7 @@ ll dist(pt& a, pt& b){
     return d.sz();
 }
 
+// 직선(선분)과 점의 거리
 double linedist(pt a, pt b, pt c){
     double d = 0;
     pt t = b - a;
