@@ -9,6 +9,24 @@ struct pt{
     ll sz(){return x * x + y * y;}
 };
 
+// 실수 좌표 점
+struct pd{
+    double x, y;
+    pd(){};
+    pd(double x, double y) : x(x), y(y) {};
+    pd(pt t) : x(t.x), y(t.y) {};
+    
+    pd operator +(pd t){return {x + t.x, y + t.y};}
+    pd operator -(pd t){return {x - t.x, y - t.y};}
+    double operator * (pd t){return x * t.x + y * t.y;}
+    double operator / (pd t){return x * t.y - y * t.x;}
+    // *등호 사용시 주의
+    bool operator == (pt t){return x == t.x && y == t.y;}
+    bool operator <(pt t){return x == t.x ? y < t.y : x < t.x;}
+    //
+    bool sz(){return x * x + y * y;}
+};
+
 int ccw(pt a, pt b, pt c){
     b = b - a; c = c - a;
     return (b / c > 0) - (b / c < 0);
