@@ -21,8 +21,8 @@ struct pd{
     double operator * (pd t){return x * t.x + y * t.y;}
     double operator / (pd t){return x * t.y - y * t.x;}
     // *등호 사용시 주의
-    bool operator == (pt t){return x == t.x && y == t.y;}
-    bool operator <(pt t){return x == t.x ? y < t.y : x < t.x;}
+    bool operator == (pd t){return x == t.x && y == t.y;}
+    bool operator <(pd t){return x == t.x ? y < t.y : x < t.x;}
     //
     bool sz(){return x * x + y * y;}
 };
