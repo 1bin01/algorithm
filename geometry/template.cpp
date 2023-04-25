@@ -14,17 +14,17 @@ struct pd{
     double x, y;
     pd(){};
     pd(double x, double y) : x(x), y(y) {};
-    pd(pt t) : x(t.x), y(t.y) {};
+    //pd(pt t) : x(t.x), y(t.y) {};
     
     pd operator +(pd t){return {x + t.x, y + t.y};}
     pd operator -(pd t){return {x - t.x, y - t.y};}
     double operator * (pd t){return x * t.x + y * t.y;}
     double operator / (pd t){return x * t.y - y * t.x;}
     // *등호 사용시 주의
-    bool operator == (pd t){return x == t.x && y == t.y;}
-    bool operator <(pd t){return x == t.x ? y < t.y : x < t.x;}
+    //bool operator == (pd t){return x == t.x && y == t.y;}
+    //bool operator <(pd t){return x == t.x ? y < t.y : x < t.x;}
     //
-    bool sz(){return x * x + y * y;}
+    double sz(){return x * x + y * y;}
 };
 
 int ccw(pt a, pt b, pt c){
