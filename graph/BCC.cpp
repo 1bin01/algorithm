@@ -1,3 +1,5 @@
+int dfsn[NMAX], low[NMAX], vis[NMAX], t, sz;
+
 void dfs(int x, int p){
     dfsn[x] = low[x] = ++t;
     int f = 0, c = 0;
@@ -16,7 +18,7 @@ void dfs(int x, int p){
     return;
 }
 
-// BCC 
+// BCC 구하기
 void dfs2(int x, int p, int c){
     vis[x] = 1;
     for(int& nx : adj[x]){
