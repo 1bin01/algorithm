@@ -63,7 +63,7 @@ vector<pd> half_plane(vector<line> v){
     }
 
     while(dq.size() > 2 && dq[0].out(interPoint(dq[dq.size() - 2], dq.back()))) dq.pop_back();
-    while(dq.size() > 2 && dq.back().out(interPoint(dq[0], dq[1]))) dq.pop_back();
+    while(dq.size() > 2 && dq.back().out(interPoint(dq[0], dq[1]))) dq.pop_front();
     if(dq.size() < 3) return ret;
     for(int i = 0, n = dq.size(); i < n; i++)
         ret.emplace_back(interPoint(dq[i], dq[(i + 1) % n]));
