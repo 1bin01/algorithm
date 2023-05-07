@@ -19,7 +19,7 @@ struct line{
         a = atan2l(d.y, d.x);
     }
     // half plane 
-    // 점이 반평면 밖에 있는 지 확인
+    // 점이 반평면 밖에 있는 지 확인 (-eps : 교집합으로 점도 가능, eps : 교집합으로 점 불가능)
     bool out(pd t){return d / (t - p) < -eps;}
     // 각도 순으로 정렬
     bool operator < (line t){return a < t.a;}
