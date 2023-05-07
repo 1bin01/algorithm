@@ -6,6 +6,7 @@ struct pd{
     pd operator -(pd t){return {x - t.x, y - t.y};}
     ld operator *(pd t){return x * t.x + y * t.y;}
     ld operator /(pd t){return x * t.y - y *t.x;}
+    ld sz() {return sqrt(x * x + y * y);}
 };
 
 struct line{
