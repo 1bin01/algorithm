@@ -1,6 +1,5 @@
 typedef long double ld;
 const double eps = 1e-10, inf = 1e9;
-
 struct pd{
     ld x, y;
     pd operator +(pd t){return {x + t.x, y + t.y};}
@@ -18,7 +17,6 @@ struct line{
     line(pd a,pd b) : p(a), d(b - a){
         tan = atan2l(d.y, d.x);
     }
-
     // half plane 
     // 점이 반평면 밖에 있는 지 확인
     bool out(pd t){return d / (t - p) < eps;}
@@ -46,7 +44,7 @@ vector<pd> half_plane(vector<line> v){
     };
     for(int i = 0; i < 4; i++) v.push_back(line(box[i], box[(i + 1) % 4]));
     */
-    
+
     vector<pd> ret;
     deque<line> dq;
     sort(all(v));
