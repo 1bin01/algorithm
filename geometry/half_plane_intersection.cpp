@@ -21,7 +21,7 @@ struct line{
     // 점이 반평면 밖에 있는 지 확인
     bool out(pd t){return d / (t - p) < eps;}
     // 각도 순으로 정렬
-    bool operator < (line t){return tan < t.tan;}
+    bool operator < (line t){return a < t.a;}
 };
 
 // 두 직선의 교점 구하기 (평행x)
