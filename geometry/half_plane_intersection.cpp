@@ -10,12 +10,12 @@ struct pd{
 
 struct line{
     pd p, d;
-    ld tan;
+    ld a;
     
     line() {}
     //두 점을 지나는 직선
-    line(pd a,pd b) : p(a), d(b - a){
-        tan = atan2l(d.y, d.x);
+    line(pd p,pd q) : p(p), d(q - p){
+        a = atan2l(d.y, d.x);
     }
     // half plane 
     // 점이 반평면 밖에 있는 지 확인
