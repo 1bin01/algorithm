@@ -20,7 +20,7 @@ struct line{
     }
     // half plane 
     // 점이 반평면 밖에 있는 지 확인
-    bool out(pd t){return d / (t - p) < eps;}
+    bool out(pd t){return d / (t - p) < -eps;}
     // 각도 순으로 정렬
     bool operator < (line t){return a < t.a;}
 };
