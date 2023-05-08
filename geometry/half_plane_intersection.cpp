@@ -20,14 +20,14 @@ struct line{
     }
     // half plane 
     // 점이 반평면 밖에 있는 지 확인 (-eps : 교집합으로 점도 가능, eps : 교집합으로 점 불가능)
-    bool out(pd t){return d / (t - p) < -eps;}
+    bool out(pd t){return d / (t - p) < eps;}
     // 각도 순으로 정렬
     bool operator < (line t){return a < t.a;}
 };
 
 // 두 직선의 교점 구하기 (평행x)
 pd interPoint(line a, line b){
-    long double t = ((b.p - a.p) / b.d) / (a.d / b.d);
+    ld t = ((b.p - a.p) / b.d) / (a.d / b.d);
     a.p.x += t * a.d.x;
     a.p.y += t * a.d.y;
     return a.p;
