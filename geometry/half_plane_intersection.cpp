@@ -1,3 +1,6 @@
+// 1. 도형의 각 변을 임의의 거리 r만큼 내부로 이동했을 때 만들어지는 영역
+// 2. 모서리와 교차하지 않고 도형 내부의 모든 점까지 그을 수 있는 영역
+
 typedef long double ld;
 const double eps = 1e-10, inf = 1e9;
 struct pd{
