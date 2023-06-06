@@ -7,6 +7,8 @@ struct pt{
     bool operator == (pt t){return x == t.x && y == t.y;}
     bool operator <(pt t){return x == t.x ? y < t.y : x < t.x;}
     ll sz(){return x * x + y * y;}
+    
+    pt mul(ll m){return {x * m, y * m};}
 };
 
 // 실수 좌표 점
@@ -73,10 +75,7 @@ bool getpoint(pt p1, pt p2, pt p3, pt p4, pt& p){
 }
 
 // 두 점 사이의 거리 (제곱)
-ll dist(pt& a, pt& b){
-    pt d = b - a;
-    return d.sz();
-}
+ll dist(pt a, pt b){ return (b - a).sz(); }
 
 // 직선(선분)과 점의 거리
 double linedist(pt a, pt b, pt c){
@@ -152,14 +151,4 @@ int inside(pt p, vector<pt>& v){
     return ccw(v[l - 1], p, v[l]) < 0;
 }
 
-// 회전하는 캘리퍼스 O(n)
-ll RotateC(vector<pt> v){
-    int n = v.size();
-    if(n == 2) return dist(v[0], v[1]);
-    ll mx = 0;
-    for(int i = 0, j = 0; i < n; i++){
-        while((v[(i + 1) % n] - v[i]) / (v[(j + 1) % n] - v[j]) >= 0) mx = max(mx, dist(v[i], v[j])), j = (j + 1) % n;
-        mx = max(mx, dist(v[i], v[j]));
-    }
-    return mx;
-}
+
