@@ -55,14 +55,15 @@ vector<int> DMST(int n, int r, const vector<edge> & E){
         }
     }
 
-    vector<int> res(2 * n, -1);
+    vector<int> res(n, -1);
     queue<int> q; q.emplace(r);
     while(q.size()){
         int x = q.front(); q.pop();
         while(P[x] != -1){
             for(auto&y : grp[P[x]]){
                 if(y == x) continue;
-                res[par_edge[y].v] = par_edge[y].u;
+                if(par_edge[y].v < n)
+                    res[par_edge[y].v] = par_edge[y].u;
                 // v를 루트로하는 서브트리에서 다시 탐색
                 q.emplace(par_edge[y].v);
                 P[y] = -1;
@@ -70,7 +71,6 @@ vector<int> DMST(int n, int r, const vector<edge> & E){
             x = P[x];
         }
     }
-    res.resize(n);
     res[r] = r;
     return res;
 }
