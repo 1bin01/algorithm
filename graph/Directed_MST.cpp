@@ -55,7 +55,7 @@ vector<int> DMST(int n, int r, const vector<edge> & E){
         }
     }
 
-    vector<int> res(n, -1);
+    vector<int> res(2 * n, -1);
     queue<int> q; q.emplace(r);
     while(q.size()){
         int x = q.front(); q.pop();
@@ -70,6 +70,7 @@ vector<int> DMST(int n, int r, const vector<edge> & E){
             x = P[x];
         }
     }
+    res.resize(n);
     res[r] = r;
     return res;
 }
