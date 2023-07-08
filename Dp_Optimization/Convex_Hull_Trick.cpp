@@ -5,7 +5,7 @@
 ll m[NMAX], p[NMAX];
 int sz, ii;
 
-double cross(int a, int b) { return 1.0 *(p[b] - p[a]) / (m[a] - m[b]); }
+long double cross(int a, int b) { return (long double) (p[b] - p[a]) / (m[a] - m[b]); }
 
 void insert(ll mm, ll pp) {
 	m[sz] = mm;
