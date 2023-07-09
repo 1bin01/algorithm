@@ -1,4 +1,5 @@
-// dp[i][j] : j개를 i개의 구간으로 나누는 CHT에서 i <= k의 조건이 있을 때 이 조건을 없애 차원 줄이기
+// dp[i][j] : j개를 i개의 구간으로 나누는 dp에서 i <= k의 조건이 있을 때 이 조건을 없애 차원 줄이기
+// 아래는 CHT + Aliens Trick 문제의 예시 코드
 
 // 기울기, x좌표 단조 증가 O(n)
 // 최소값 upper bound convexhull
