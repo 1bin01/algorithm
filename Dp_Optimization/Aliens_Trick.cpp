@@ -30,28 +30,30 @@ ll f(ll x){
  
 pair<ll, ll> go(ll cost){
     sz = ii = 0;
+    // initial state update
     auto&[x, y] = v[0];
     upd(-2 * x, x * x, 0);
+    
     for(int i = 1; i <= n; i++){
-        auto&[x, y] = v[i - 1];
-        dp[i] = f(y + 1) + (y + 1) * (y + 1) + cost;
+        // 수식 계산
+        // p : <dp[i], cnt[i]>
+        pair<ll,ll> p = {f({Xval}) + {Pval} + cost, cnt[ii] + 1};
         if(i < n){
-            ll xx = v[i].first;
-            ll dy = max(y + 1LL - xx, 0LL);
-            upd(-2 * xx, xx * xx - dy * dy + dp[i], cnt[ii] + 1);
+            // 수식 계산
+            upd({mval}, {pval}, p.second);
         }
-        else return make_pair(dp[n], cnt[ii] + 1); 
+        else return p; 
     }
     return {-1, -1};
 }
 
 // 이분 탐색 (한 접선에 대응되는 점이 여럿인 경우 주의해서 처리)
-ll l = 0, r = ?, m, ans = -1e18;
+ll l = 0, r = ?, mid, ans = -1e18;
 while(l < r){
-    m = (l + r) / 2;
-    auto p = go(m);
-    ans = max(ans, p.first - k * m);
-    if(p.second <= k) r = m;
-    else l = m + 1;
+    mid = (l + r) / 2;
+    auto p = go(mid);
+    ans = max(ans, p.first - k * mid);
+    if(p.second <= k) r = mid;
+    else l = mid + 1;
 }
 return ans;
