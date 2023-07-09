@@ -47,10 +47,10 @@ int go(ll cost){
 
 // 이분 탐색
 ll l = 0, r = ?, mid;
-    while(l < r){
-        mid = (l + r) / 2;
-        if(go(mid) <= k) r = mid;
-        else l = mid + 1;
-    }
-    go(l);
+while(l < r){
+    mid = (l + r) / 2;
+    if(go(mid) <= k) r = mid;
+    else l = mid + 1;
+}
+go(l);
 return dp[n] - l * k;
