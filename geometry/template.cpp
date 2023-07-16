@@ -4,8 +4,8 @@ struct pt{
     pt operator - (pt t){return {x - t.x, y - t.y};}
     ll operator * (pt t){return x * t.x + y * t.y;}
     ll operator / (pt t){return x * t.y - y * t.x;}
-    bool operator == (pt t){return x == t.x && y == t.y;}
-    bool operator <(pt t){return x == t.x ? y < t.y : x < t.x;}
+    bool operator == (const pt t)const{return x == t.x && y == t.y;}
+    bool operator <(const pt t)const{return x == t.x ? y < t.y : x < t.x;}
     ll sz(){return x * x + y * y;}
     
     pt mul(ll m){return {x * m, y * m};}
