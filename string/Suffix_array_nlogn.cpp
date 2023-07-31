@@ -1,4 +1,5 @@
 // 배열 크기는 2배로
+// d[n] ~ d[2 * n] 값은 0이여야 함.(초기화 주의)
 // m = max(n, 128)
 int n, m, sa[NMAX], g[NMAX], cnt[NMAX], idx[NMAX], tmp[NMAX];
 string s;
