@@ -1,28 +1,29 @@
-const int NMAX = 3e5 + 5;
-int n, m, a[NMAX];
-vector<int> seg[NMAX];
+const int b = 1 << 17;
+int n, a[NMAX];
+vector<int> seg[b * 2];
 
-void make_tree(int idx, int l, int r) {
-	if (l == r) {
-		seg[idx].emplace_back(a[l]);
-		return;
-	}
-	int m = (l + r) / 2, lc = idx * 2, rc = idx * 2 + 1;
-	make_tree(lc, l, m);
-	make_tree(rc, m + 1, r);
-	vector<int>& lt = seg[lc], &rt = seg[rc], &t = seg[idx];
-	seg[idx].resize(lt.size() + rt.size());
-	for (int i1 = 0, i2 = 0, i3 = 0; i3 < t.size();) {
-		if (i2 == rt.size() || i1 < lt.size() && lt[i1] < rt[i2]) t[i3++] = lt[i1++];
-		else t[i3++] = rt[i2++];
-	}
-	return;
+// initialize segment tree O(nlogn)
+for(int i = 1; i <= n; i++) seg[b + i].emplace_back(a[i]);
+for(int i = b - 1; i; i--){
+	seg[i].resize(seg[i * 2].size() + seg[i * 2 + 1].size());
+        merge(all(seg[i * 2]), all(seg[i * 2 + 1]), seg[i].begin());
 }
 
-int query(int idx, int nl, int nr, int l, int r, int k) {
-	if (nl > r || nr < l) return 0;
-	if (nl >= l && nr <= r)
-		return seg[idx].end() - upper_bound(all(seg[idx]), k);
-	int m = (nl + nr) / 2;
-	return query(idx * 2, nl, m, l, r, k) + query(idx * 2 + 1, m + 1, nr, l, r, k);
+// query O((logn^)2)
+// example : 구간 [l, r]에서 k보다 큰 원소의 개수
+int qry(int l, int r, int k){
+    int ret = 0;
+    l += b; r += b;
+    while(l <= r){
+        if(l & 1){
+            auto it = upper_bound(all(seg[l]), k);
+            ret += seg[l++].end() - it;
+        }
+        if(!(r & 1)){
+            auto it = upper_bound(all(seg[r]), k);
+            ret += seg[r--].end() - it;   
+        }
+        l /= 2; r /= 2;
+    }
+    return ret;
 }
