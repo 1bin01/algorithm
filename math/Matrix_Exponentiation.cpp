@@ -1,7 +1,7 @@
 // 행렬 거듭제곱
 // time complexity : O(n^3 * log(k))
 // n*n matrix만 가능
-
+ 
 typedef vector<vector<ll>> mat;
 const ll mod = 1e9 + 7;
 
