@@ -22,7 +22,7 @@ mat matpow(mat a, ll k){
     for(int i = 0; i < sz; i++) ret[i][i] = 1;
     while(k){
         if(k & 1) ret = ret * a;
-        k /= 2; a = a * a;
+        a = a * a; k >>= 1;
     }
     return ret;
 }
