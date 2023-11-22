@@ -12,3 +12,4 @@ PS에서 사용하는 알고리즘을 직접 구현해 정리해놓고 있습니
 * Directed Mst - O(ElogE)
 ### Math  
 * Pow
+* Matrix Exponentiation - O(N^3 * log(K))
