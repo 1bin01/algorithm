@@ -4,7 +4,7 @@ const ll mod = 1e9 + 7;
 // time complexity : O(log(k))
 ll Pow(ll x, ll k) {		
 	ll ret = 1;
-	while (x) {
+	while (k) {
 		if (k & 1) {
 			ret *= x; ret %= mod;
 		}
