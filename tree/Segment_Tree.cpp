@@ -1,6 +1,8 @@
 // 구간합 세그
+const int b = 1 << 18;
+ll seg[b * 2];
 
-void upd(int ix, int v){
+void upd(int ix, ll v){
     ix += b;
     while(ix){
         seg[ix] += v;
@@ -9,8 +11,8 @@ void upd(int ix, int v){
     return;
 }
  
-int sum(int l, int r){
-    int ret = 0;
+ll sum(int l, int r){
+    ll ret = 0;
     l += b; r += b;
     while(l <= r){
         if(l & 1) ret += seg[l++];
