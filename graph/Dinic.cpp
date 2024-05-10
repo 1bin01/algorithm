@@ -1,3 +1,6 @@
+// time complexity : O(min(fE, V^2E))
+// edge의 capacity가 0 또는 1이라면(unit capacit) : O(V^(2/3)*E, E^(3/2))
+
 struct edge {
 	int to, cap, rev;
 };
@@ -13,28 +16,28 @@ void add_edge(int u, int v, int c) {
 bool bfs(int s, int t) {
 	memset(lv, 0, sizeof(lv));
 	memset(w, 0, sizeof(w));
-	queue<int> Q;
-	Q.emplace(s); lv[s] = 1;
-	while (Q.size()) {
-		int now = Q.front();  Q.pop();
+	queue<int> q;
+	q.emplace(s); lv[s] = 1;
+	while (q.size()) {
+		int now = q.front();  q.pop();
 		for (auto& e : adj[now]) {
 			if (e.cap > 0 && !lv[e.to]) {
 				lv[e.to] = lv[now] + 1;
-				Q.emplace(e.to);
+				q.emplace(e.to);
 			}
 		}
 	}
 	return lv[t];
 }
 
-int dfs(int now, int t, int f) {
-	if (now == t) return f;
-	for (int& i = w[now]; i < adj[now].size(); i++) {
-		auto e = adj[now][i];
+int dfs(int x, int t, int f) {
+	if (x == t) return f;
+	for (int& i = w[x]; i < adj[x].size(); i++) {
+		auto e = adj[x][i];
 		if (e.cap > 0 && lv[e.to] == lv[now] + 1) {
 			int flow = dfs(e.to, t, min(f, e.cap));
 			if (flow) {
-				adj[now][i].cap -= flow;
+				adj[x][i].cap -= flow;
 				adj[e.to][e.rev].cap += flow;
 				return flow;
 			}
