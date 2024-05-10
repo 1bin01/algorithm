@@ -12,7 +12,7 @@ PS에서 사용하는 알고리즘을 직접 구현해 정리해놓고 있습니
 ### Graph  
 * Eulerian Circuit - O(V + E)
 * Directed Mst - O(ElogE)
-* dinic - O(min(fE, V^2E))
+* Dinic - O(min(fE, V^2E))
 * planar graph
 ### Tree  
 * Segment Tree
