@@ -53,3 +53,13 @@ int dinic(int s, int t) {
 	}
 	return ret;
 }
+
+// min-cut에서 sink에 속하는 원소 구하기
+int vis[NMAX];
+void dfs2(int x){
+	if(vis[x]) return;
+	vis[x] = 1;
+	for(auto&[nx, cap, rev] : adj[x])
+		if(cap > eps) dfs2(nx);
+	return;
+}
