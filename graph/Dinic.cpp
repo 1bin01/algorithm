@@ -19,8 +19,8 @@ bool bfs(int s, int t) {
 	queue<int> q;
 	q.emplace(s); lv[s] = 1;
 	while (q.size()) {
-		int now = q.front();  q.pop();
-		for (auto& e : adj[now]) {
+		int x = q.front();  q.pop();
+		for (auto& e : adj[x]) {
 			if (e.cap > 0 && !lv[e.to]) {
 				lv[e.to] = lv[now] + 1;
 				q.emplace(e.to);
