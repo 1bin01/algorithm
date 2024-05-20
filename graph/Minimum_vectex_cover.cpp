@@ -1,12 +1,14 @@
 // 이분매칭 O(VE)
 int v[NMAX], L[NMAX], R[NMAX];
-int dfs(int now) {
-	if (v[now]) return 0;
-	v[now] = 1;
+vector<int> adj[NMAX];
 
-	for (int nx : adj[now]) {
+int dfs(int x) {
+	if (v[x]) return 0;
+	v[x] = 1;
+
+	for(int& nx : adj[x]) {
 		if (!R[nx] || dfs(R[nx])) {
-			R[nx] = now; L[now] = nx;
+			R[nx] = x; L[x] = nx;
 			return 1;
 		}
 	}
@@ -15,12 +17,13 @@ int dfs(int now) {
 
 // minium vertex cover 원소 구하기
 // X : L의 매칭되지 않은 정점으로부터 도달할 수 있는 L, R의 모든 정점
+// L : 1~n , R : n+1 ~ n+m
 // C = (L - X) U (R ∩ X)
 int X[NMAX * 2], C[NMAX * 2];	
-void go(int now) {
-	if (X[now]) return;
-	X[now] = 1;	
-	for (int nx : adj[now]) {
+void go(int x) {
+	if (X[x]) return;
+	X[x] = 1;	
+	for (int& nx : adj[x]) {
 		X[nx + n] = 1;
 		go(R[nx]);
 	}
@@ -37,6 +40,6 @@ int main(void){
 		if (!L[i]) go(i);	// L의 매칭되지 않은 정점들로부터 탐색
 
 	// mvc 구하기
-	for (int i = 1; i <= n; i++) C[i] = ~X[i];
+	for (int i = 1; i <= n; i++) C[i] = !X[i];
 	for (int i = n + 1; i <= n + m; i++) C[i] = X[i]; 
 }
