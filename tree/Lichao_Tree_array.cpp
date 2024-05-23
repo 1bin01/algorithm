@@ -29,6 +29,6 @@ void ins(int ix, int l, int r, Line line) {
 ll qry(int ix, int l, int r, ll x) {
     if(l == r) return LT[ix](x);
     int m = (l + r) >> 1;
-    if(x < m) return max(LT[ix](x), qry(ix * 2, l, m, x));
+    if(x <= m) return max(LT[ix](x), qry(ix * 2, l, m, x));
     else return max(LT[ix](x), qry(ix * 2 + 1, m + 1, r, x));
 }
