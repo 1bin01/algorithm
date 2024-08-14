@@ -2,7 +2,6 @@ int isa[NMAX], lcp[NMAX], l;
 string s;
 
 void getLCP(string& s){
-    s += '$';
     l = 0;
 
     for(int i = 0; i < n; i++) isa[sa[i]] = i;
