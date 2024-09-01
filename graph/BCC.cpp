@@ -1,8 +1,9 @@
 int dfsn[NMAX], low[NMAX], vis[NMAX], t, sz;
+vector<int> adj[NMAX];
 
 void dfs(int x, int p){
     dfsn[x] = low[x] = ++t;
-    int f = 0, c = 0;
+    int f = 0, c = 0;    // 단절점 구할 때
     
     for(int& nx : adj[x]){
         if(nx == p) continue;
