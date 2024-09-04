@@ -19,22 +19,13 @@ void dfs(int x, int p){
     return;
 }
 
-// BCC 구하기
+int color[NMAX];
 void dfs2(int x, int p, int c){
-    vis[x] = 1;
+    color[x] = c;
     for(int& nx : adj[x]){
         if(nx == p) continue;
-        if(dfsn[nx] < dfsn[x]) cnt[c]++;
-        if(vis[nx]) continue;
-        
-        if(low[nx] >= dfsn[x]){
-            cnt[++sz]++;
-            dfs2(nx, x, sz);
-        }
-        else {
-            cnt[c]++;
-            dfs2(nx, x, c);
-        }
-    }    
+        if(low[nx] > dfsn[x]) dfs2(nx, x, ++sz);
+        else dfs2(nx, x, c);
+    }
     return;
 }
