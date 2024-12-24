@@ -29,7 +29,7 @@ void DFS2(int x, int p, int d, int ct) {
 }
 
 // Centroid Tree 만들기
-void make_tree(int x, int p) {
+void make_tree(int x) {
     int k = DFS(x, -1) / 2;
     int ct = Cent(x, -1, k);    // ct : 현재 centroid 정점
     DFS2(ct, -1, 0, ct);    // ct의 서브트리 update
