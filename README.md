@@ -22,6 +22,7 @@ PS에서 사용하는 알고리즘을 직접 구현해 정리해놓고 있습니
 * Lazy Segment Tree
 * Persistent Segment Tree
 * Lichao Tree - array
+* Centroid Tree - O(NlogN)
 ### String
 * Hashing
 * Kmp - O(N + M)
