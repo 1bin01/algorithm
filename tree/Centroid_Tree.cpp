@@ -35,6 +35,6 @@ void make_tree(int x) {
     DFS2(ct, -1, 0, ct);    // ct의 서브트리 update
     vis[ct] = 1;
     for (int& nx : adj[ct])
-        if (!vis[nx]) make_tree(nx, ct);
+        if (!vis[nx]) make_tree(nx);
     return;
 }
