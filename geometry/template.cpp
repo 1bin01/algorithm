@@ -2,26 +2,29 @@ struct pt{
     ll x, y;
     pt operator + (pt t){return {x + t.x, y + t.y};}
     pt operator - (pt t){return {x - t.x, y - t.y};}
-    ll operator * (pt t){return x * t.x + y * t.y;}
-    ll operator / (pt t){return x * t.y - y * t.x;}
+    pt operator * (ll c){return {x * c, y * c};}
+    pt operator / (ll c){return {x / c, y / c};}
     bool operator == (const pt t)const{return x == t.x && y == t.y;}
     bool operator <(const pt t)const{return x == t.x ? y < t.y : x < t.x;}
     ll sz(){return x * x + y * y;}
-    
-    pt mul(ll m){return {x * m, y * m};}
 };
+ll dot(pt a, pt b){ return a.x*b.x + a.y*b.y;}    // 내적
+ll cross(pt a, pt b){ return a.x*b.y - a.y*b.x;}    // 외적
+ll dist2(pt a, pt b){ return dot(a-b, a-b);}        // 거리 제곱
 
 // 실수 좌표 점
+#define pt pd
+const double eps = 1e-12;
 struct pd{
     double x, y;
     pd(){};
     pd(double x, double y) : x(x), y(y) {};
     //pd(pt t) : x(t.x), y(t.y) {};
     
-    pd operator +(pd t){return {x + t.x, y + t.y};}
-    pd operator -(pd t){return {x - t.x, y - t.y};}
-    double operator * (pd t){return x * t.x + y * t.y;}
-    double operator / (pd t){return x * t.y - y * t.x;}
+    pd operator + (pd t){return {x + t.x, y + t.y};}
+    pd operator - (pd t){return {x - t.x, y - t.y};}
+    pd operator * (double c){return {x * c, y * c};}
+    pd operator / (double c){return {x / c, y / c};}
     // *등호 사용시 주의
     //bool operator == (const pd t)const{return x == t.x && y == t.y;}
     //bool operator <(const pd t)const{return x == t.x ? y < t.y : x < t.x;}
@@ -29,9 +32,18 @@ struct pd{
     double sz(){return x * x + y * y;}
 };
 
+double dot(pd a, pd b){ return a.x*b.x + a.y*b.y;}    // 내적
+double cross(pd a, pd b){ return a.x*b.y - a.y*b.x;}    // 외적
+double dist2(pd a, pd b){ return dot(a-b, a-b);}        // 거리 제곱
+
+// vector를 90도 회전하기
+// rotate a point CCW or CW around the origin
+pt RotateCCW90(pt p)   { return {-p.y,p.x}; }
+pt RotateCW90(pt p)    { return {p.y,-p.x}; }
+
 int ccw(pt a, pt b, pt c){
     b = b - a; c = c - a;
-    return (b / c > 0) - (b / c < 0);
+    return (cross(b, c) > 0) - (cross(b, c) < 0);
 }
 
 // 선분 교차 판정
@@ -74,8 +86,18 @@ bool getpoint(pt p1, pt p2, pt p3, pt p4, pt& p){
     return 1;
 }
 
-// 두 점 사이의 거리 (제곱)
-ll dist(pt a, pt b){ return (b - a).sz(); }
+// 직선 ab와 직선 cd의 교점 구하기
+// 교점이 정확히 한 개 존재한다고 가정 (두 직선 평행 x)
+// 선분의 경우 교점이 존재하는 지 우선 확인
+// compute intersection of line passing through a and b
+// with line passing through c and d, assuming that unique
+// intersection exists; for segment intersection, check if
+// segments intersect first
+pt LineIntersection(pt a, pt b, pt c, pt d) {
+  b=b-a; d=c-d; c=c-a;
+  assert(dot(b, b) > eps && dot(d, d) > eps); 
+  return a + b * cross(c, d) / cross(b, d);
+}
 
 // 직선(선분)과 점의 거리
 double linedist(pt a, pt b, pt c){
@@ -151,4 +173,10 @@ int inside(pt p, vector<pt>& v){
     return ccw(v[l - 1], p, v[l]) < 0;
 }
 
-
+// 삼각형의 외심 구하기
+// compute center of circle given three points
+pt CircumCcenter(pt a, pt b, pt c) {
+  b=(a+b)/2;
+  c=(a+c)/2;
+  return LineIntersection(b, b + RotateCW90(a - b), c, c + RotateCW90(a - c));
+}
