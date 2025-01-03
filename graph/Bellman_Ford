@@ -1,13 +1,30 @@
-ll n, dist[NMAX], cy;
+ll n, dist[NMAX];
+/* int from[NMAX]; */
 vector<pair<int, ll>> adj[NMAX];
 
-void bmf(){
-    for(int i = 0; i < n; i++)
+int bmf(){
+    int S;
+    for(int i = 0; i < n; i++){
+        S = -1;
         for(int x = 1; x <= n; x++)
             for(auto&[nx, t] : adj[x])
                 if(dist[x] + t < dist[nx]){
                     dist[nx] = dist[x] + t;
-                    if(i == n - 1) cy = 1;   
+                    /* from[nx] = x; */
+                    S = nx;
                 }
+    }
+
+    if(S == -1) return 1;
+    else{    // negative cycle exists
+        for(int i = 0; i < n; i++) S = from[S];
+        vector<int> cycle;    // find negative cycle
+        for(int x = S;; x = from[x]){
+            cycle.emplace_back(x);
+            if(x == S && cycle.size() > 1) break;
+        }
+        reverse(all(cycle));
+        // have to return cycle
+    }
     return;
 }
