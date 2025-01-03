@@ -21,7 +21,7 @@ bool bfs(int s, int t) {
 	while (q.size()) {
 		int x = q.front();  q.pop();
 		for (auto& e : adj[x]) {
-			if (e.cap > 0 && !lv[e.to]) {
+			if (e.cap && !lv[e.to]) {
 				lv[e.to] = lv[x] + 1;
 				q.emplace(e.to);
 			}
@@ -34,7 +34,7 @@ int dfs(int x, int t, int f) {
 	if (x == t) return f;
 	for (int& i = w[x]; i < adj[x].size(); i++) {
 		auto e = adj[x][i];
-		if (e.cap > 0 && lv[e.to] == lv[now] + 1) {
+		if (e.cap && lv[e.to] == lv[now] + 1) {
 			int flow = dfs(e.to, t, min(f, e.cap));
 			if (flow) {
 				adj[x][i].cap -= flow;
@@ -63,3 +63,13 @@ void dfs2(int x){
 		if(cap > eps) dfs2(nx);
 	return;
 }
+
+/*
+LR flow 구현 시
+1. edge (u, v) 용량이 [l, r] 이면, cap(u->T') = l, cap(S'->v) = l, cap(u->v) = r-l
+2. cap(T->S) 무한 용량 간선 추가
+3. S'->T' flow가 sum(l)이면 flow가 존재.
+4. (T->S) 간선(역간선 포함!) 지우고 S->T flow를 흘림
+5. 3과 4에서 흘린 flow의 합이 max-flow
+max flow는 
+*/
