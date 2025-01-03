@@ -1,5 +1,5 @@
 ll n, dist[NMAX];
-/* int from[NMAX]; */
+/* int p[NMAX]; */
 vector<pair<int, ll>> adj[NMAX];
 
 int bmf(){
@@ -10,16 +10,16 @@ int bmf(){
             for(auto&[nx, t] : adj[x])
                 if(dist[x] + t < dist[nx]){
                     dist[nx] = dist[x] + t;
-                    /* from[nx] = x; */
+                    /* p[nx] = x; */
                     S = nx;
                 }
     }
 
     if(S == -1) return 1;
     else{    // negative cycle exists
-        for(int i = 0; i < n; i++) S = from[S];
+        for(int i = 0; i < n; i++) S = p[S];
         vector<int> cycle;    // find negative cycle
-        for(int x = S;; x = from[x]){
+        for(int x = S;; x = p[x]){
             cycle.emplace_back(x);
             if(x == S && cycle.size() > 1) break;
         }
