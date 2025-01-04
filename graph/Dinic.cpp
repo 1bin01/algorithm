@@ -33,11 +33,11 @@ bool bfs(int s, int t) {
 int dfs(int x, int t, int f) {
 	if (x == t) return f;
 	for (int& i = w[x]; i < adj[x].size(); i++) {
-		auto e = adj[x][i];
-		if (e.cap && lv[e.to] == lv[now] + 1) {
+		auto& e = adj[x][i];
+		if (e.cap && lv[e.to] == lv[x] + 1) {
 			int flow = dfs(e.to, t, min(f, e.cap));
 			if (flow) {
-				adj[x][i].cap -= flow;
+				e.cap -= flow;
 				adj[e.to][e.rev].cap += flow;
 				return flow;
 			}
