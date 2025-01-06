@@ -5,6 +5,7 @@ PS에서 사용하는 알고리즘을 직접 구현해 정리해놓고 있습니
 ### Dp Optimization
 * Convex Hull Trick - O(N)
 * Convex Hull Trick (Lichao tree) - O(NlogN)
+* SOS dp - O(n2^n)
 ### Math  
 * Extended_Euclid - O(logN)
 * Matrix Exponentiation - O(N^3 * log(K))
