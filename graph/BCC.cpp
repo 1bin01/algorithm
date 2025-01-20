@@ -20,12 +20,12 @@ void dfs(int x, int p){
 }
 
 int color[NMAX];
-void dfs2(int x, int p, int c){
+void dfs2(int x, int c) {
     color[x] = c;
-    for(int& nx : adj[x]){
-        if(nx == p) continue;
-        if(low[nx] > dfsn[x]) dfs2(nx, x, ++sz);
-        else dfs2(nx, x, c);
+    for(int& nx : adj[x]) {
+        if(color[nx]) continue;
+        if(low[nx] > dfsn[x]) dfs2(nx, ++sz);
+        else dfs2(nx, c);
     }
     return;
 }
