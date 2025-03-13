@@ -1,5 +1,7 @@
+// https://github.com/dong-gas/algorithm/blob/main/MATH/NTT.cpp
+
 /*
-mod / w(원시근)
+mod / w
 998'244'353 3
 985'661'441 3
 1'012'924'417 5
@@ -11,55 +13,56 @@ mod / w(원시근)
 2013265921 31
 */
 
-/* code from https://github.com/ar-pa/ICPC-template/blob/master/NTT.cpp*/
-namespace NTT {
-    const int maxn = 1 << 18;
-    const int p = 998244353;
-    const int g = 3;
-    int R[maxn], tmp[maxn];
-
-    int pm(int a, int b) {
-        int res = 1;
-        while (b) {
-            if (b & 1) res = (ll) res * a % p;
-            a = (ll) a * a % p;
-            b >>= 1;
+ll Pow(ll x, ll k) {
+    ll ret = 1;
+    while (k) {
+        if (k & 1) {
+            ret *= x; ret %= mod;
         }
-        return res;
+        x = x * x % mod; k >>= 1;
     }
+    return ret;
+}
 
-    void NTT(int *a, int n, int on) {
-        for (int i = 0; i < n; i++)
-            if (i < R[i]) swap(a[i], a[R[i]]);
-        int wn, u, v;
-        for (int i = 1, m = 2; i < n; i = m, m <<= 1) {
-            wn = pm(g, (p - 1) / m);
-            if (on == -1) wn = pm(wn, p - 2);
-            for (int j = 0; j < n; j += m) {
-                for (int k = 0, w = 1; k < i; k++, w = (ll) w * wn % p) {
-                    u = a[j + k], v = (ll) w * a[i + j + k] % p;
-                    a[j + k] = (u + v) % p;
-                    a[i + j + k] = (u - v + p) % p;
+template<ll mod, ll w>
+class NTT{
+public:
+    void ntt(vector<ll> &f, bool inv = 0){
+        int n = f.size(), j = 0;
+        vector<ll> root(n >> 1);
+        for(int i=1; i<n; i++){
+            int bit = (n >> 1);
+            while(j >= bit){
+                j -= bit; bit >>= 1;
+            }
+            j += bit;
+            if(i < j) swap(f[i], f[j]);
+        }
+        ll ang = Pow(w, (mod - 1) / n); if(inv) ang = Pow(ang, mod - 2);
+        root[0] = 1; for(int i=1; i<(n >> 1); i++) root[i] = root[i-1] * ang % mod;
+        for(int i=2; i<=n; i<<=1){
+            int step = n / i;
+            for(int j=0; j<n; j+=i){
+                for(int k=0; k<(i >> 1); k++){
+                    ll u = f[j | k], v = f[j | k | i >> 1] * root[step * k] % mod;
+                    f[j | k] = (u + v) % mod;
+                    f[j | k | i >> 1] = (u - v) % mod;
+                    if(f[j | k | i >> 1] < 0) f[j | k | i >> 1] += mod;
                 }
             }
         }
-        if (on == -1)
-            for (int i = 0, k = pm(n, p - 2); i < n; i++) a[i] = (ll) a[i] * k % p;
+        ll t = Pow(n, mod - 2);
+        if(inv) for(int i=0; i<n; i++) f[i] = f[i] * t % mod;
     }
-
-    vector<int> multiply(vector<int> &A, vector<int> &B) {
-        vector<int> C;
-        int n = A.size(), m = B.size();
-        int l1 = n, l2 = m, L = 0;
-        m += n, n = 1;
-        while (n <= m) n <<= 1, L++;
-        for (int i = 0; i < n; i++) R[i] = (R[i >> 1] >> 1) | ((i & 1) << (L - 1));
-        A.resize(n);
-        B.resize(n);
-        NTT(A.data(), n, 1);
-        NTT(B.data(), n, 1);
-        for (int i = 0; i < n; i++) tmp[i] = (ll) A[i] * B[i] % p;
-        NTT(tmp, n, -1);
-        return vector<int>(tmp, tmp + l1 + l2 - 1);
+    vector<ll> multiply(vector<ll> &_a, vector<ll> &_b){
+        vector<ll> a(all(_a)), b(all(_b));
+        int n = 2;
+        while(n < a.size() + b.size()) n <<= 1;
+        a.resize(n); b.resize(n);
+        ntt(a); ntt(b);
+        for(int i=0; i<n; i++) a[i] = a[i] * b[i] % mod;
+        ntt(a, 1);
+        return a;
     }
-}
+};
+NTT<mod, w> ntt; //<mod, 원시근>
