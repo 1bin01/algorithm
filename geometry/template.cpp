@@ -1,9 +1,9 @@
 struct pt{
     ll x, y;
-    pt operator + (pt t){return {x + t.x, y + t.y};}
-    pt operator - (pt t){return {x - t.x, y - t.y};}
-    pt operator * (ll c){return {x * c, y * c};}
-    pt operator / (ll c){return {x / c, y / c};}
+    pt operator + (const pt t)const{return {x + t.x, y + t.y};}
+    pt operator - (const pt t)const{return {x - t.x, y - t.y};}
+    pt operator * (const ll c)const{return {x * c, y * c};}
+    pt operator / (const ll c)const{return {x / c, y / c};}
     bool operator == (const pt t)const{return x == t.x && y == t.y;}
     bool operator <(const pt t)const{return x == t.x ? y < t.y : x < t.x;}
     ll sz(){return x * x + y * y;}
