@@ -7,7 +7,7 @@ namespace pst {
     int root[B];
     int t = 0;
 
-    int new_node(int x) {
+    int new_node(ll x) {
         nd[++t]={ x, 0, 0 };
         return t;
     }
