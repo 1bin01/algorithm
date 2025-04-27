@@ -1,6 +1,7 @@
 const int B = 1<<17;  // base
 const ll E = 1<<30;  // range : [0, E]
-ll t, n, m, q, p;
+ll t;
+
 struct node {
     int l, r;
     ll v;
