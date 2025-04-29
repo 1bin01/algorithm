@@ -19,6 +19,7 @@ PS에서 사용하는 알고리즘을 직접 구현해 정리해놓고 있습니
 * Directed Mst - O(ElogE)
 * Dinic + LR flow- O(min(fE, V^2E))
 * Eulerian Circuit - O(V + E)
+* Offline Dynamic Connectivity - O(Q(logQ)^2)
 * planar graph
 ### Tree  
 * Dynamic Segment Tree
