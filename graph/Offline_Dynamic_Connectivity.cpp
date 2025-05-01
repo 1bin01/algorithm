@@ -5,6 +5,10 @@ int par[B], sz[B], ans[B];
 int find(int x){return par[x] == -1 ? x : find(par[x]);}
 vector<int> st;
 
+void init(int n){
+    for (int i = 1; i <= n; i++) par[i] = -1, sz[i] = 1;
+}
+
 void Union(int a, int b) {  // rank compression
     a = find(a); b = find(b);
     if (sz[a] < sz[b]) swap(a, b);
@@ -49,6 +53,4 @@ map<pair<int, int>, int> S;  // a < b
 int n, m, op, a, b;
 
 // <main>
-// memset(par, -1, sizeof(par));
-// for (int i = 1; i <= n; i++) sz[i] = 1;
 // 마지막까지 있는 간선 update
