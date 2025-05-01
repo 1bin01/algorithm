@@ -1,5 +1,5 @@
 const int B = 1 << 17;
-pair<int, int> E[B];
+pair<int, int> E[B];    // query 저장
 vector<pair<int, int>> seg[B * 2]; // 각 쿼리 구간 [l, r]을 포함하는 간선
 int par[B], sz[B], ans[B];
 int find(int x){return par[x] == -1 ? x : find(par[x]);}
@@ -53,4 +53,5 @@ map<pair<int, int>, int> S;  // a < b
 int n, m, op, a, b;
 
 // <main>
+// init(n);
 // 마지막까지 있는 간선 update
