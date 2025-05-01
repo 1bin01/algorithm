@@ -2,8 +2,17 @@ const int B = 1 << 17;
 pair<int, int> E[B];    // query 저장
 vector<pair<int, int>> seg[B * 2]; // 각 쿼리 구간 [l, r]을 포함하는 간선
 int par[B], sz[B], ans[B];
-int find(int x){return par[x] == -1 ? x : find(par[x]);}
 vector<int> st;
+
+int find(int x){return par[x] == -1 ? x : find(par[x]);}
+
+/*
+pair<int, int> find(int x) {    //  return : < root, color>
+    if (par[x] == -1) return {x, 0};
+    auto [p, c] = find(par[x]);
+    return pair(p, c ^ C[x]);
+}
+*/
 
 void init(int n){
     for (int i = 1; i <= n; i++) par[i] = -1, sz[i] = 1;
