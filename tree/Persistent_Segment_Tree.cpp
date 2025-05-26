@@ -24,12 +24,12 @@ namespace pst {
         if(l == r) return ix;
         int m = (l + r) / 2;
         if(i <= m) {
-            nd[ix].l = update(nd[prev].l, i, l, m, i, v);
+            nd[ix].l = update(nd[prev].l, l, m, i, v);
             nd[ix].r = nd[prev].r;
         }
         else {
             nd[ix].l = nd[prev].l;
-            nd[ix].r = update(nd[prev].r, i, m + 1, r, i, v);
+            nd[ix].r = update(nd[prev].r, m + 1, r, i, v);
         }
         return ix;
     }
